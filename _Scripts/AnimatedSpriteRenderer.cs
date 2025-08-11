@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class AnimatedSpriteRenderer : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
-
     [SerializeField] private Sprite idleSprite;
     [SerializeField] private Sprite[] animationSprites;
     [SerializeField] private float animationTime = 0.25f;
+    [SerializeField] private bool loop = true;
 
+    private SpriteRenderer spriteRenderer;
     private int animationFrame;
-    private bool loop = true;
     public bool idle = true;
 
     private void Awake()

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.Mathematics;
+using UnityEngine.Tilemaps;
 
 public class BombController : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class BombController : MonoBehaviour
     [SerializeField] private float explosionDuration = 1f;
     [SerializeField] private int explosionRadius = 1;
 
+    [Header("Destructible")]
+    [SerializeField] private Destructible destructiblePrefab;
+    [SerializeField] private Tilemap destructibleTiles;
     private void OnEnable() 
     {
         bombsRemaining = bombAmount;
@@ -69,6 +73,7 @@ public class BombController : MonoBehaviour
 
         if (Physics2D.OverlapBox(position,Vector2.one/2f,0f,explosionLayerMask))
         {
+            ClearDestructible(position);
             return;
         }
 
@@ -85,6 +90,18 @@ public class BombController : MonoBehaviour
         if (collision.gameObject.layer==LayerMask.NameToLayer("Bomb"))
         {
             collision.isTrigger = false;
+        }
+    }
+
+    private void ClearDestructible(Vector2 position)
+    {
+        Vector3Int cell = destructibleTiles.WorldToCell(position);
+        TileBase tile = destructibleTiles.GetTile(cell);
+
+        if (tile != null)
+        {
+            Instantiate(destructiblePrefab,position,Quaternion.identity);
+            destructibleTiles.SetTile(cell,null);
         }
     }
 
