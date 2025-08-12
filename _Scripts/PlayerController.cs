@@ -4,7 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D PlayerRb;
     [SerializeField] private Vector2 direction = Vector2.down;
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed;
 
     [SerializeField] private KeyCode inputDown = KeyCode.S;
     [SerializeField] private KeyCode inputUp = KeyCode.W;

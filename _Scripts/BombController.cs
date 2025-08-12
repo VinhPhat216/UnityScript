@@ -15,8 +15,8 @@ public class BombController : MonoBehaviour
     [Header("Explosion")]
     [SerializeField] private Explosion explosionPrefab;
     [SerializeField] private LayerMask explosionLayerMask;
-    [SerializeField] private float explosionDuration = 1f;
-    [SerializeField] private int explosionRadius = 1;
+    public float explosionDuration = 1f;
+    public int explosionRadius = 1;
 
     [Header("Destructible")]
     [SerializeField] private Destructible destructiblePrefab;
@@ -105,4 +105,9 @@ public class BombController : MonoBehaviour
         }
     }
 
+    public void AddBomb()
+    {
+        bombAmount++;
+        bombsRemaining++;
+    }
 }
